@@ -107,6 +107,11 @@ $host_hex    = $sub->getHostPortionHex();    // 000000CB
 $host_binary = $sub->getHostPortionBinary(); // 00000000000000000000000011001011
 ```
 
+### Get List IP
+```php
+$list_ip        = $sub->getIpListRange();       // [ 192.168.112.0, 192.168.112.1, ... , 192.168.113.255 ]
+```
+
 ### Reports
 
 #### Printed Report

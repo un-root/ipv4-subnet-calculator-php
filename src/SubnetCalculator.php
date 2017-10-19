@@ -366,6 +366,33 @@ class SubnetCalculator
         return $string;
     }
 
+    /**
+     * Get list of IP from range.
+     * @return array Array of elements containing list IP.
+     */
+    public function getIpListRange()
+    {
+        $listIp = array();
+
+        $quadsIpFirst = explode('.', $this->getNetworkPortion());
+        $quadsIpLast = explode('.', $this->getBroadcastAddress());
+
+        for ($ipQuadsFirst = $quadsIpFirst[0]; $ipQuadsFirst <= $quadsIpLast[0]; $ipQuadsFirst++) {
+            $ipAddress = $ipQuadsFirst.'.';
+            for ($ipQuadsSecond = $quadsIpFirst[1]; $ipQuadsSecond <= $quadsIpLast[1]; $ipQuadsSecond++) {
+                $ipAddress .= $ipQuadsSecond.'.';
+                for ($ipQuadsThird = $quadsIpFirst[2]; $ipQuadsThird <= $quadsIpLast[2]; $ipQuadsThird++) {
+                    $ipAddress .= $ipQuadsThird.'.';
+                    for ($ipQuadsFourth = $quadsIpFirst[3]; $ipQuadsFourth <= $quadsIpLast[3]; $ipQuadsFourth++) {
+                        $listIp[] = $ipAddress.$ipQuadsFourth;
+                    }
+                }
+            }
+        }
+
+        return $listIp;
+    }
+
   // PRIVATE METHODS
 
     /**
