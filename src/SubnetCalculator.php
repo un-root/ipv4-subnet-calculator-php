@@ -377,14 +377,23 @@ class SubnetCalculator
         $quadsIpFirst = explode('.', $this->getNetworkPortion());
         $quadsIpLast = explode('.', $this->getBroadcastAddress());
 
+        $ipAddress = '';
+        $ip_address = '';
+
         for ($ipQuadsFirst = $quadsIpFirst[0]; $ipQuadsFirst <= $quadsIpLast[0]; $ipQuadsFirst++) {
             $ipAddress = $ipQuadsFirst.'.';
+            $arr_ip = explode('.', $ipAddress);
+            $ip_address = $arr_ip[count($arr_ip)-2].'.';
             for ($ipQuadsSecond = $quadsIpFirst[1]; $ipQuadsSecond <= $quadsIpLast[1]; $ipQuadsSecond++) {
-                $ipAddress .= $ipQuadsSecond.'.';
+                $ipAddress = $ip_address.$ipQuadsSecond.'.';
+                $arr_ip = explode('.', $ipAddress);
+                $ip_address = $arr_ip[0].'.'.$arr_ip[count($arr_ip)-2].'.';
                 for ($ipQuadsThird = $quadsIpFirst[2]; $ipQuadsThird <= $quadsIpLast[2]; $ipQuadsThird++) {
-                    $ipAddress .= $ipQuadsThird.'.';
+                    $ipAddress = $ip_address.$ipQuadsThird.'.';
+                    $arr_ip = explode('.', $ipAddress);
+                    $ip_address = $arr_ip[0].'.'.$arr_ip[1].'.'.$arr_ip[count($arr_ip)-2].'.';
                     for ($ipQuadsFourth = $quadsIpFirst[3]; $ipQuadsFourth <= $quadsIpLast[3]; $ipQuadsFourth++) {
-                        $listIp[] = $ipAddress.$ipQuadsFourth;
+                        $listIp[] = $ip_address.$ipQuadsFourth;
                     }
                 }
             }
